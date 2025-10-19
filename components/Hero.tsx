@@ -67,7 +67,7 @@ const Hero: React.FC<HeroProps> = ({ onNavigate }) => {
       <div className="absolute inset-0 bg-black/60 z-1"></div>
       
       <div className="relative z-10 px-4 w-full">
-        <h2 className="text-4xl md:text-6xl font-extrabold tracking-tight">
+        <h2 className="text-4xl md:text-6xl font-extrabold tracking-tight break-words">
           <span className="bg-clip-text text-transparent bg-gradient-to-r from-blue-300 to-purple-400">
             {text}
           </span>

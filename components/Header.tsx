@@ -229,7 +229,7 @@ const Header: React.FC<HeaderProps> = ({ onNavigate, searchQuery, setSearchQuery
              <button 
                key={link.label} 
                onClick={() => link.type === 'anchor' ? handleAnchorLink(link.href!) : handlePageLink(link.page!)}
-               className="text-3xl font-semibold text-gray-300 hover:text-white transition-colors"
+               className="text-2xl font-semibold text-gray-300 hover:text-white transition-colors"
             >
                {link.label}
              </button>
