@@ -1,15 +1,97 @@
-import React, { useState, useLayoutEffect } from 'react';
+import React, { useState, useLayoutEffect, useEffect } from 'react';
 import Header from './components/Header';
 import Hero from './components/Hero';
 import ToolSection from './components/ToolSection';
 import AboutSection from './components/AboutSection';
-import { INITIAL_VIDEO_TOOLS, INITIAL_IMAGE_TOOLS, LONG_VIDEO_TOOLS, VIRAL_SHORT_TOOLS, AUDIO_TOOLS } from './constants';
+import {
+  INITIAL_VIDEO_TOOLS,
+  INITIAL_IMAGE_TOOLS,
+  LONG_VIDEO_TOOLS,
+  VIRAL_SHORT_TOOLS,
+  WRITING_TOOLS,
+  AUDIO_TOOLS,
+  CHATBOT_TOOLS,
+  CODING_TOOLS,
+  RESEARCH_TOOLS,
+  BUSINESS_TOOLS,
+  PRODUCTIVITY_TOOLS,
+  DATA_TOOLS,
+  EDUCATION_TOOLS,
+  HEALTHCARE_TOOLS,
+  LEGAL_FINANCE_TOOLS,
+  ECOMMERCE_TOOLS,
+  HR_RECRUITING_TOOLS,
+  GAMING_TOOLS,
+  STORYTELLING_TOOLS,
+  AUTOMATION_TOOLS,
+  SEARCH_DISCOVERY_TOOLS,
+  SECURITY_PRIVACY_TOOLS,
+  EXPERIMENT_SANDBOX_TOOLS
+} from './constants';
 import ToolCard from './components/ToolCard';
 import ScrollToTopButton from './components/ScrollToTopButton';
 import ExplorePage from './components/ExplorePage';
 import type { Tool } from './constants';
 import ToolDetailsPage from './components/ToolDetailsPage';
 import MaintenancePopup from './components/MaintenancePopup';
+
+// Consolidate all tools into a single, unique list
+const allToolsLists = [
+    ...INITIAL_VIDEO_TOOLS, ...INITIAL_IMAGE_TOOLS, ...LONG_VIDEO_TOOLS, ...VIRAL_SHORT_TOOLS,
+    ...WRITING_TOOLS, ...AUDIO_TOOLS, ...CHATBOT_TOOLS, ...CODING_TOOLS,
+    ...RESEARCH_TOOLS, ...BUSINESS_TOOLS, ...PRODUCTIVITY_TOOLS, ...DATA_TOOLS,
+    ...EDUCATION_TOOLS, ...HEALTHCARE_TOOLS, ...LEGAL_FINANCE_TOOLS, ...ECOMMERCE_TOOLS,
+    ...HR_RECRUITING_TOOLS, ...GAMING_TOOLS, ...STORYTELLING_TOOLS, ...AUTOMATION_TOOLS,
+    ...SEARCH_DISCOVERY_TOOLS, ...SECURITY_PRIVACY_TOOLS, ...EXPERIMENT_SANDBOX_TOOLS
+];
+
+const allUniqueTools = allToolsLists.reduce((acc, current) => {
+    if (!acc.find(item => item.name === current.name)) {
+      acc.push(current);
+    }
+    return acc;
+}, [] as Tool[]);
+
+// Function to derive app state from URL path
+const getPageStateFromPath = (path: string): { page: string; toolType?: string; tool?: Tool } => {
+    const pathParts = path.split('/').filter(p => p);
+    
+    if (pathParts.length === 0) return { page: 'home' };
+
+    const page = pathParts[0];
+    const param = pathParts[1] ? decodeURIComponent(pathParts[1]) : undefined;
+
+    switch (page) {
+        case 'terms': return { page: 'terms' };
+        case 'privacy': return { page: 'privacy' };
+        case 'contact': return { page: 'contact' };
+        case 'explore': return { page: 'explore' };
+        case 'all-tools':
+            return param ? { page: 'all-tools', toolType: param } : { page: 'home' };
+        case 'tool-details':
+            if (param) {
+                const tool = allUniqueTools.find(t => t.name === param);
+                if (tool) return { page: 'tool-details', tool };
+            }
+            return { page: 'home' }; // Fallback if tool not found
+    }
+    return { page: 'home' }; // Default fallback
+};
+
+// Function to derive URL path from app state
+const getPathFromPageState = (pageState: { page: string; toolType?: string; tool?: Tool }): string => {
+    switch (pageState.page) {
+        case 'terms': return '/terms';
+        case 'privacy': return '/privacy';
+        case 'contact': return '/contact';
+        case 'explore': return '/explore';
+        case 'all-tools': return `/all-tools/${encodeURIComponent(pageState.toolType!)}`;
+        case 'tool-details': return `/tool-details/${encodeURIComponent(pageState.tool!.name)}`;
+        case 'home':
+        default:
+            return '/';
+    }
+};
 
 // START: Component Definitions for Pages and Footer
 
@@ -226,15 +308,31 @@ const ContactPage: React.FC<{ onNavigate: (pageState: { page: string }) => void 
 // END: Component Definitions
 
 const App: React.FC = () => {
-  const [currentPage, setCurrentPage] = useState<{ page: string; toolType?: string; tool?: Tool }>({ page: 'home' });
+  const [currentPage, setCurrentPage] = useState<{ page: string; toolType?: string; tool?: Tool }>(() => getPageStateFromPath(window.location.pathname));
   const [searchQuery, setSearchQuery] = useState('');
   const [isMaintenanceMode] = useState(false);
+
+  // Effect to handle browser history navigation (back/forward buttons)
+  useEffect(() => {
+    const handlePopState = () => {
+      setCurrentPage(getPageStateFromPath(window.location.pathname));
+    };
+
+    window.addEventListener('popstate', handlePopState);
+    return () => {
+      window.removeEventListener('popstate', handlePopState);
+    };
+  }, []);
 
   useLayoutEffect(() => {
     window.scrollTo({ top: 0, left: 0, behavior: 'instant' });
   }, [currentPage.page, currentPage.tool?.name]);
 
   const handleNavigate = (pageState: { page: string; toolType?: string; tool?: Tool }) => {
+    const path = getPathFromPageState(pageState);
+    if (window.location.pathname !== path) {
+      window.history.pushState(pageState, '', path);
+    }
     setCurrentPage(pageState);
   };
 
