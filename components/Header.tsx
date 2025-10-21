@@ -1,8 +1,8 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { INITIAL_VIDEO_TOOLS, INITIAL_IMAGE_TOOLS, LONG_VIDEO_TOOLS } from '../constants';
+import { INITIAL_VIDEO_TOOLS, INITIAL_IMAGE_TOOLS, LONG_VIDEO_TOOLS, AUDIO_TOOLS } from '../constants';
 import type { Tool } from '../constants';
 
-const allTools = [...INITIAL_VIDEO_TOOLS, ...INITIAL_IMAGE_TOOLS, ...LONG_VIDEO_TOOLS];
+const allTools = [...INITIAL_VIDEO_TOOLS, ...INITIAL_IMAGE_TOOLS, ...LONG_VIDEO_TOOLS, ...AUDIO_TOOLS];
 // Deduplicate tools that might exist in multiple categories
 const uniqueTools = allTools.reduce((acc, current) => {
   if (!acc.find(item => item.name === current.name)) {
@@ -114,7 +114,7 @@ const Header: React.FC<HeaderProps> = ({ onNavigate, searchQuery, setSearchQuery
   const navLinks = [
     { type: 'anchor', href: '#video-tools', label: 'Video Tools' },
     { type: 'anchor', href: '#viral-video-tools', label: 'Viral Video Tools' },
-    { type: 'anchor', href: '#image-tools', label: 'Image Tools' },
+    { type: 'anchor', href: '#voice-tools', label: 'Voice Tools' },
     { type: 'anchor', href: '#about-us', label: 'About Us' },
     { type: 'page', page: 'contact', label: 'Contact Us' },
   ];

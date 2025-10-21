@@ -4,9 +4,11 @@ import type { Tool } from '../constants';
 interface ToolCardProps {
   tool: Tool;
   onNavigate: (pageState: { page: string; tool: Tool }) => void;
+  isComingSoon?: boolean;
+  onComingSoonClick?: () => void;
 }
 
-const ToolCard: React.FC<ToolCardProps> = ({ tool, onNavigate }) => {
+const ToolCard: React.FC<ToolCardProps> = ({ tool, onNavigate, isComingSoon = false, onComingSoonClick }) => {
   const cardRef = useRef<HTMLDivElement>(null);
 
   const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
@@ -26,23 +28,30 @@ const ToolCard: React.FC<ToolCardProps> = ({ tool, onNavigate }) => {
   };
   
   const handleCardClick = () => {
-    onNavigate({ page: 'tool-details', tool });
+    if (isComingSoon && onComingSoonClick) {
+      onComingSoonClick();
+    } else if (!isComingSoon) {
+      onNavigate({ page: 'tool-details', tool });
+    }
   };
 
   const handleLinkClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
     e.stopPropagation();
+    if (isComingSoon) {
+      e.preventDefault();
+    }
   }
 
   return (
     <div
       ref={cardRef}
       onClick={handleCardClick}
-      onMouseMove={handleMouseMove}
-      onMouseLeave={handleMouseLeave}
-      className="group relative flex flex-col items-center p-4 glass-card rounded-xl aspect-square backdrop-blur-sm transition-all duration-300 hover:border-blue-500/50 cursor-pointer"
+      onMouseMove={isComingSoon ? undefined : handleMouseMove}
+      onMouseLeave={isComingSoon ? undefined : handleMouseLeave}
+      className={`group relative flex flex-col items-center p-4 glass-card rounded-xl aspect-square backdrop-blur-sm transition-all duration-300 cursor-pointer ${isComingSoon ? 'filter blur-sm' : 'hover:border-blue-500/50'}`}
       style={{ transformStyle: 'preserve-3d', transition: 'transform 0.1s ease' }}
     >
-      <div className="absolute -inset-px rounded-xl bg-gradient-to-r from-blue-500 to-purple-600 opacity-0 group-hover:opacity-75 transition-opacity duration-300 blur-md"></div>
+      <div className={`absolute -inset-px rounded-xl bg-gradient-to-r from-blue-500 to-purple-600 transition-opacity duration-300 blur-md ${isComingSoon ? 'opacity-0' : 'opacity-0 group-hover:opacity-75'}`}></div>
       <div className="relative z-10 w-full h-full flex flex-col items-center justify-evenly text-center">
         <div 
           className="flex items-center justify-center w-16 h-16 sm:w-20 sm:h-20 text-white transition-transform duration-300 group-hover:scale-110 [&>svg]:w-full [&>svg]:h-full rounded-full overflow-hidden"
@@ -57,7 +66,7 @@ const ToolCard: React.FC<ToolCardProps> = ({ tool, onNavigate }) => {
           target="_blank"
           rel="noopener noreferrer"
           onClick={handleLinkClick}
-          className="px-5 py-2 text-sm font-semibold text-white bg-gradient-to-r from-blue-600 to-purple-700 rounded-full shadow-lg transition-transform duration-300 group-hover:scale-110"
+          className={`px-5 py-2 text-sm font-semibold text-white bg-gradient-to-r from-blue-600 to-purple-700 rounded-full shadow-lg transition-transform duration-300 ${isComingSoon ? '' : 'group-hover:scale-110'}`}
           style={{ transform: 'translateZ(30px)' }}
         >
           Try it

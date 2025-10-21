@@ -57,7 +57,7 @@ const Hero: React.FC<HeroProps> = ({ onNavigate }) => {
   return (
     <div className="relative h-[60vh] w-full flex items-center justify-center text-center overflow-hidden">
       <video
-        src="https://ik.imagekit.io/wee6hkfuj/banner_1017.mp4?updatedAt=1760709777784"
+        src="https://ik.imagekit.io/wee6hkfuj/1022.mp4?updatedAt=1761058825714"
         autoPlay
         loop
         muted

@@ -3,7 +3,7 @@ import Header from './components/Header';
 import Hero from './components/Hero';
 import ToolSection from './components/ToolSection';
 import AboutSection from './components/AboutSection';
-import { INITIAL_VIDEO_TOOLS, INITIAL_IMAGE_TOOLS, LONG_VIDEO_TOOLS } from './constants';
+import { INITIAL_VIDEO_TOOLS, INITIAL_IMAGE_TOOLS, LONG_VIDEO_TOOLS, VIRAL_SHORT_TOOLS, AUDIO_TOOLS } from './constants';
 import ToolCard from './components/ToolCard';
 import ScrollToTopButton from './components/ScrollToTopButton';
 import ExplorePage from './components/ExplorePage';
@@ -21,6 +21,10 @@ const AllToolsPage: React.FC<{
     ? INITIAL_VIDEO_TOOLS 
     : toolType === 'Image' 
     ? INITIAL_IMAGE_TOOLS
+    : toolType === 'Viral Shorts'
+    ? VIRAL_SHORT_TOOLS
+    : toolType === 'Audio'
+    ? AUDIO_TOOLS
     : LONG_VIDEO_TOOLS;
   
   const title = `All ${toolType} Tools`;
@@ -118,13 +122,23 @@ const HomePage: React.FC<{
         />
         <div className="my-16 sm:my-24"></div>
         <ToolSection
-          id="image-tools"
-          title="Create High Quality Images From Text/Reference"
-          description="Generate breathtaking images, photorealistic portraits, and complex scenes from your imagination. These AI image generators are perfect for artists, designers, and creators."
-          tools={INITIAL_IMAGE_TOOLS}
-          toolType="Image"
+          id="viral-shorts-tools"
+          title="Turn videos into viral shorts"
+          description="Automatically find the most engaging parts of your long-form content and transform them into captivating, shareable shorts ready for social media."
+          tools={VIRAL_SHORT_TOOLS}
+          toolType="Viral Shorts"
           onNavigate={onNavigate}
-          underlineColor="#a855f7"
+          underlineColor="#f472b6"
+        />
+        <div className="my-16 sm:my-24"></div>
+        <ToolSection
+          id="voice-tools"
+          title="Text To Realistic Voice"
+          description="Transform any text into natural-sounding speech with AI-powered voice generators. Perfect for podcasts, audiobooks, and accessibility."
+          tools={AUDIO_TOOLS}
+          toolType="Audio"
+          onNavigate={onNavigate}
+          underlineColor="#10b981"
         />
         <div className="my-16 sm:my-24"></div>
         <AboutSection />
@@ -214,7 +228,7 @@ const ContactPage: React.FC<{ onNavigate: (pageState: { page: string }) => void 
 const App: React.FC = () => {
   const [currentPage, setCurrentPage] = useState<{ page: string; toolType?: string; tool?: Tool }>({ page: 'home' });
   const [searchQuery, setSearchQuery] = useState('');
-  const [isMaintenanceMode] = useState(true);
+  const [isMaintenanceMode] = useState(false);
 
   useLayoutEffect(() => {
     window.scrollTo({ top: 0, left: 0, behavior: 'instant' });

@@ -3,6 +3,7 @@ import {
   INITIAL_VIDEO_TOOLS,
   INITIAL_IMAGE_TOOLS,
   LONG_VIDEO_TOOLS,
+  VIRAL_SHORT_TOOLS,
   WRITING_TOOLS,
   AUDIO_TOOLS,
   CHATBOT_TOOLS,
@@ -25,6 +26,7 @@ import {
 } from '../constants';
 import type { Tool } from '../constants';
 import ToolCard from './ToolCard';
+import ComingSoonPopup from './ComingSoonPopup';
 
 // Consolidate video tools and deduplicate
 const videoAndAnimationTools = [...INITIAL_VIDEO_TOOLS, ...LONG_VIDEO_TOOLS].reduce((acc, current) => {
@@ -34,29 +36,13 @@ const videoAndAnimationTools = [...INITIAL_VIDEO_TOOLS, ...LONG_VIDEO_TOOLS].red
   return acc;
 }, [] as Tool[]);
 
-// Combine all tools and deduplicate for the 'All' category
+// Combine all tools from active categories for the 'All' view.
 const allTools = [
     ...videoAndAnimationTools,
+    ...VIRAL_SHORT_TOOLS,
+    ...AUDIO_TOOLS,
     ...INITIAL_IMAGE_TOOLS,
     ...WRITING_TOOLS,
-    ...AUDIO_TOOLS,
-    ...CHATBOT_TOOLS,
-    ...CODING_TOOLS,
-    ...RESEARCH_TOOLS,
-    ...BUSINESS_TOOLS,
-    ...PRODUCTIVITY_TOOLS,
-    ...DATA_TOOLS,
-    ...EDUCATION_TOOLS,
-    ...HEALTHCARE_TOOLS,
-    ...LEGAL_FINANCE_TOOLS,
-    ...ECOMMERCE_TOOLS,
-    ...HR_RECRUITING_TOOLS,
-    ...GAMING_TOOLS,
-    ...STORYTELLING_TOOLS,
-    ...AUTOMATION_TOOLS,
-    ...SEARCH_DISCOVERY_TOOLS,
-    ...SECURITY_PRIVACY_TOOLS,
-    ...EXPERIMENT_SANDBOX_TOOLS
 ].reduce((acc, current) => {
     if (!acc.find(item => item.name === current.name)) {
       acc.push(current);
@@ -68,6 +54,7 @@ const allTools = [
 const categories: { [key: string]: Tool[] } = {
   'All': allTools,
   'Video & Animation': videoAndAnimationTools,
+  'Viral Shorts': VIRAL_SHORT_TOOLS,
   'Image & Design': INITIAL_IMAGE_TOOLS,
   'Writing & Content': WRITING_TOOLS,
   'Audio & Voice': AUDIO_TOOLS,
@@ -91,12 +78,24 @@ const categories: { [key: string]: Tool[] } = {
 };
 
 const categoryOrder = [
-  'All', 'Video & Animation', 'Image & Design', 'Writing & Content', 'Audio & Voice', 'Chatbots & Assistants',
+  'All', 'Video & Animation', 'Viral Shorts', 'Audio & Voice', 'Image & Design', 'Writing & Content', 'Chatbots & Assistants',
   'Coding & Development', 'Research & Knowledge', 'Business & Marketing', 'Productivity & Workflow', 'Data & Analytics',
-  'Education & Learning', 'Healthcare & Wellness', 'Legal & Finance', 'E‑commerce & Sales', 'HR & Recruiting',
+  'Education & Learning', 'Healthcare & Wellness', 'Legal & Finance', 'E-commerce & Sales', 'HR & Recruiting',
   'Gaming & Entertainment', 'Creative Storytelling', 'Automation & Integrations', 'Search & Discovery',
   'Security & Privacy', 'Experiment & Sandbox'
 ];
+
+const activeCategoryNames = new Set([
+  'All', 'Video & Animation', 'Viral Shorts', 'Audio & Voice', 'Image & Design', 'Writing & Content'
+]);
+
+const comingSoonToolsSet = new Set([
+    ...CHATBOT_TOOLS, ...CODING_TOOLS, ...RESEARCH_TOOLS, ...BUSINESS_TOOLS,
+    ...PRODUCTIVITY_TOOLS, ...DATA_TOOLS, ...EDUCATION_TOOLS, ...HEALTHCARE_TOOLS,
+    ...LEGAL_FINANCE_TOOLS, ...ECOMMERCE_TOOLS, ...HR_RECRUITING_TOOLS, ...GAMING_TOOLS,
+    ...STORYTELLING_TOOLS, ...AUTOMATION_TOOLS, ...SEARCH_DISCOVERY_TOOLS,
+    ...SECURITY_PRIVACY_TOOLS, ...EXPERIMENT_SANDBOX_TOOLS
+].map(tool => tool.name));
 
 
 interface ExplorePageProps {
@@ -105,6 +104,7 @@ interface ExplorePageProps {
 
 const ExplorePage: React.FC<ExplorePageProps> = ({ onNavigate }) => {
   const [selectedCategory, setSelectedCategory] = useState('All');
+  const [isPopupOpen, setIsPopupOpen] = useState(false);
   const scrollContainerRef = useRef<HTMLDivElement>(null);
   
   const toolsToShow = categories[selectedCategory] || [];
@@ -124,6 +124,14 @@ const ExplorePage: React.FC<ExplorePageProps> = ({ onNavigate }) => {
       return () => container.removeEventListener('wheel', onWheel);
     }
   }, []);
+
+  const handleCategoryClick = (category: string) => {
+    if (activeCategoryNames.has(category)) {
+      setSelectedCategory(category);
+    } else {
+      setIsPopupOpen(true);
+    }
+  };
 
   return (
     <div className="container mx-auto px-4 py-16 sm:py-24 text-white animate-fade-in">
@@ -146,7 +154,7 @@ const ExplorePage: React.FC<ExplorePageProps> = ({ onNavigate }) => {
               {categoryOrder.map(category => (
                 <button
                   key={category}
-                  onClick={() => setSelectedCategory(category)}
+                  onClick={() => handleCategoryClick(category)}
                   className={`flex-shrink-0 whitespace-nowrap rounded-full px-5 py-3 text-sm sm:text-base font-semibold transition-all duration-300 transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-transparent focus:ring-purple-500 ${
                     selectedCategory === category
                       ? 'bg-gradient-to-r from-blue-500 to-purple-600 text-white shadow-lg'
@@ -161,15 +169,26 @@ const ExplorePage: React.FC<ExplorePageProps> = ({ onNavigate }) => {
         </div>
 
         <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4 md:gap-6">
-          {toolsToShow.map((tool, index) => (
-            <div
-              key={`${selectedCategory}-${tool.name}-${index}`}
-              className="animate-fade-in"
-              style={{ animationDelay: `${index * 50}ms`, opacity: 0 }}
-            >
-              <ToolCard tool={tool} onNavigate={onNavigate} />
-            </div>
-          ))}
+          {toolsToShow.map((tool, index) => {
+             const isComingSoon = 
+              (selectedCategory === 'All' && comingSoonToolsSet.has(tool.name)) ||
+              !activeCategoryNames.has(selectedCategory);
+              
+            return (
+              <div
+                key={`${selectedCategory}-${tool.name}-${index}`}
+                className="animate-fade-in"
+                style={{ animationDelay: `${index * 50}ms`, opacity: 0 }}
+              >
+                <ToolCard 
+                  tool={tool} 
+                  onNavigate={onNavigate}
+                  isComingSoon={isComingSoon}
+                  onComingSoonClick={() => setIsPopupOpen(true)}
+                />
+              </div>
+            );
+          })}
         </div>
 
         <div className="mt-16 text-center">
@@ -178,6 +197,7 @@ const ExplorePage: React.FC<ExplorePageProps> = ({ onNavigate }) => {
           </button>
         </div>
       </div>
+      <ComingSoonPopup isOpen={isPopupOpen} onClose={() => setIsPopupOpen(false)} />
     </div>
   );
 };

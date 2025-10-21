@@ -54,12 +54,10 @@ const haiperAiLogo = `<svg viewBox="0 0 100 100" fill="none" xmlns="http://www.w
 
 // New Long Video Tool Logos
 const lumen5Logo = `<svg viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M20 20 L 20 80 L 80 80" stroke="currentColor" strokeWidth="4"/><path d="M50 50 H 80 V 20 H 50 Z" fill="currentColor"/></svg>`;
-const kapwingLogo = `<svg viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M20 20 L 50 50 L 20 80" stroke="currentColor" strokeWidth="4"/><path d="M80 20 L 50 50 L 80 80" stroke="currentColor" strokeWidth="4"/></svg>`;
 const rawShortsLogo = `<svg viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M30 20 L 70 20 L 70 60 L 50 80 L 30 60 Z" stroke="currentColor" strokeWidth="4"/></svg>`;
 const waveVideoLogo = `<svg viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M10 50 C 30 30, 50 70, 70 50 S 90 30, 90 30" stroke="currentColor" strokeWidth="4"/></svg>`;
 const wisecutLogo = `<svg viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M20 50 L 80 50 M 50 20 L 40 50 L 50 80" stroke="currentColor" strokeWidth="4"/><path d="M70 35 L 70 65" stroke="currentColor" strokeWidth="4"/></svg>`;
 const munchLogo = `<svg viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M20 80 C 50 20, 50 20, 80 80 Z" stroke="currentColor" strokeWidth="4"/><path d="M35 80 C 50 50, 50 50, 65 80" stroke="currentColor" strokeWidth="4"/></svg>`;
-const klapLogo = `<svg viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M20 20 H 50 L 20 50 H 50 M 60 60 L 80 60 L 80 80" stroke="currentColor" strokeWidth="4"/></svg>`;
 const vidyoAiLogo = `<svg viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M20 30 L 50 70 L 80 30" stroke="currentColor" strokeWidth="4"/><rect x="45" y="65" width="10" height="10" fill="currentColor"/></svg>`;
 const quickvidLogo = `<svg viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M20 20 L 80 50 L 20 80 Z" stroke="currentColor" strokeWidth="4"/><path d="M50 35 L 80 50 L 50 65" stroke="currentColor" strokeWidth="2"/></svg>`;
 const clipchampLogo = `<svg viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M20 30 H 80 M 20 70 H 80 M 50 30 V 70" stroke="currentColor" strokeWidth="4"/><rect x="40" y="40" width="20" height="20" fill="currentColor"/></svg>`;
@@ -87,98 +85,58 @@ const genericSecurityLogo = `<svg viewBox="0 0 100 100" fill="none" xmlns="http:
 const genericSandboxLogo = `<svg viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M20 70 L 30 30 H 70 L 80 70 H 20 Z" stroke="currentColor" strokeWidth="4"/><path d="M20 70 C 40 80, 60 80, 80 70" stroke="currentColor" strokeWidth="4"/></svg>`;
 
 export const INITIAL_VIDEO_TOOLS: Tool[] = [
-  { name: 'iMyFone', logo: '<img src="https://ik.imagekit.io/wee6hkfuj/unnamed-1.jpg?updatedAt=1760862362163" alt="iMyFone Logo" style="object-fit: contain; width: 100%; height: 100%;" />', url: 'https://www.imyfone.com/', article: placeholderArticle },
-  { name: 'Imagine art', logo: '<img src="https://ik.imagekit.io/wee6hkfuj/jjjjknbkm(1)(1).jpg?updatedAt=1760863113317" alt="Imagine art Logo" style="object-fit: contain; width: 100%; height: 100%;" />', url: 'https://www.imagine.art/', article: placeholderArticle },
-  { name: 'Pollo Ai', logo: '<img src="https://ik.imagekit.io/wee6hkfuj/ljkhhkhkk(1)(1).jpg?updatedAt=1760865140374" alt="Pollo Ai Logo" style="object-fit: contain; width: 100%; height: 100%;" />', url: 'https://www.pollo.ai/', article: placeholderArticle },
-  { name: 'Artist', logo: '<img src="https://ik.imagekit.io/wee6hkfuj/Copilot_20251019_125715(1).png?updatedAt=1760858952636" alt="Artist Logo" style="object-fit: contain; width: 100%; height: 100%;" />', url: 'https://artist.ai/', article: placeholderArticle },
-  { name: 'Vidnoz', logo: '<img src="https://ik.imagekit.io/wee6hkfuj/4KWfOYnR_400x400(1)(1).jpg?updatedAt=1760859627624" alt="Vidnoz Logo" style="object-fit: contain; width: 100%; height: 100%;" />', url: 'https://www.vidnoz.com/', article: placeholderArticle },
-  { name: 'Higgsfield', logo: '<img src="https://ik.imagekit.io/wee6hkfuj/higgsfield_logo(1)(1).jpg?updatedAt=1760871736359" alt="Higgsfield Logo" style="object-fit: contain; width: 100%; height: 100%;" />', url: 'https://www.higgsfield.com/', article: placeholderArticle },
-  { name: 'VidFly', logo: '<img src="https://ik.imagekit.io/wee6hkfuj/vidfly-icon-filled-256(1)(1)(1).png?updatedAt=1760895462213" alt="VidFly Logo" style="object-fit: contain; width: 100%; height: 100%;" />', url: 'https://vidfly.ai/', article: placeholderArticle },
-  { name: 'Leonardo', logo: '<img src="https://ik.imagekit.io/wee6hkfuj/leonardo-logo_1_-removebg-preview.png?updatedAt=1760873809348" alt="Leonardo Logo" style="object-fit: contain; width: 100%; height: 100%;" />', url: 'https://leonardo.ai/', article: placeholderArticle },
-  { name: 'DeeVid AI', logo: '<img src="https://ik.imagekit.io/wee6hkfuj/22247730-deevid-logo-422x422-removebg-preview(1).png?updatedAt=1760892139250" alt="DeeVid AI Logo" style="object-fit: contain; width: 100%; height: 100%;" />', url: 'https://deevid.ai/', article: placeholderArticle },
-  { name: 'PIXLR', logo: '<img src="https://ik.imagekit.io/wee6hkfuj/X4uS5WUa_400x400(1)(1).jpg?updatedAt=1760890413696" alt="PIXLR Logo" style="object-fit: contain; width: 100%; height: 100%;" />', url: 'https://pixlr.com/', article: placeholderArticle },
-  { name: 'Zebracat', logo: '<img src="https://ik.imagekit.io/wee6hkfuj/zebracat-icon-filled-256(1)(1).png?updatedAt=1760864349815" alt="Zebracat Logo" style="object-fit: contain; width: 100%; height: 100%;" />', url: 'https://www.zebracat.ai/', article: placeholderArticle },
-  { name: 'Fliki Ai', logo: '<img src="https://ik.imagekit.io/wee6hkfuj/fliki-icon-filled-256-1(1)(1).jpg?updatedAt=1760890839752" alt="Fliki Ai Logo" style="object-fit: contain; width: 100%; height: 100%;" />', url: 'https://fliki.ai/', article: placeholderArticle },
-  { name: 'Sora', logo: soraLogo, url: 'https://openai.com/sora', article: `<p>Sora is OpenAI's groundbreaking text-to-video model. It can generate realistic and imaginative scenes from simple text instructions, creating videos up to a minute long while maintaining visual quality and adherence to the user's prompt.</p><h3 class="text-xl font-bold text-gray-100 mt-6 mb-2">Key Features</h3><ul class="list-disc list-inside space-y-2"><li>Creates high-fidelity, minute-long videos from text.</li><li>Can generate complex scenes with multiple characters, specific types of motion, and accurate details of the subject and background.</li><li>Understands how objects exist in the physical world, allowing it to interpret props and generate compelling characters that express vibrant emotions.</li><li>Can also animate still images and extend existing videos.</li></ul><h3 class="text-xl font-bold text-gray-100 mt-6 mb-2">Who is it for?</h3><p>Sora is aimed at visual artists, designers, and filmmakers who want to rapidly prototype creative ideas or generate high-quality video content without traditional production constraints.</p>` },
-  { name: 'Runway', logo: runwayLogo, url: 'https://runwayml.com/', article: placeholderArticle },
-  { name: 'Pika', logo: pikaLogo, url: 'https://pika.art/', article: placeholderArticle },
-  { name: 'Kaiber', logo: kaiberLogo, url: 'https://www.kaiber.ai/', article: placeholderArticle },
-  { name: 'Gen-2', logo: gen2Logo, url: 'https://runwayml.com/ai-tools/gen-2/', article: placeholderArticle },
-  { name: 'Veed.io', logo: veedLogo, url: 'https://www.veed.io/', article: placeholderArticle },
-  { name: 'Synthesia', logo: '<img src="https://ik.imagekit.io/wee6hkfuj/imagesfhvn.png?updatedAt=1760897684256" alt="Synthesia Logo" style="object-fit: contain; width: 100%; height: 100%;" />', url: 'https://www.synthesia.io/', article: placeholderArticle },
-  { name: 'HetGen', logo: '<img src="https://ik.imagekit.io/wee6hkfuj/apps.10279.13b71432-e992-43be-af65-123449130199.19fc4577-aa0a-4a42-b54d-4d75859dc0c8.png?updatedAt=1760898255285" alt="HetGen Logo" style="object-fit: contain; width: 100%; height: 100%;" />', url: 'https://www.heygen.com/', article: placeholderArticle },
-  { name: 'InVideo', logo: invideoLogo, url: 'https://invideo.io/', article: placeholderArticle },
-  { name: 'HeyGen', logo: heygenLogo, url: 'https://www.heygen.com/', article: placeholderArticle },
-  { name: 'Luma AI', logo: lumaAiLogo, url: 'https://lumalabs.ai/', article: placeholderArticle },
-  { name: 'Captions AI', logo: captionsAiLogo, url: 'https://www.captions.ai/', article: placeholderArticle },
-  { name: 'FlexClip', logo: flexClipLogo, url: 'https://www.flexclip.com/', article: placeholderArticle },
-  { name: 'Visla', logo: vislaLogo, url: 'https://www.visla.us/', article: placeholderArticle },
-  { name: 'Elai.io', logo: elaiIoLogo, url: 'https://elai.io/', article: placeholderArticle },
-  { name: 'Colossyan', logo: colossyanLogo, url: 'https://www.colossyan.com/', article: placeholderArticle },
-  { name: 'D-ID', logo: dIdLogo, url: 'https://www.d-id.com/', article: placeholderArticle },
-  { name: 'Hour One', logo: hourOneLogo, url: 'https://hourone.ai/', article: placeholderArticle },
-  { name: 'Synthesys', logo: synthesysLogo, url: 'https://synthesys.io/', article: placeholderArticle },
-  { name: 'Genmo', logo: genmoLogo, url: 'https://www.genmo.ai/', article: placeholderArticle },
-  { name: 'Moonvalley', logo: moonvalleyLogo, url: 'https://moonvalley.ai/', article: placeholderArticle },
-  { name: 'Domo AI', logo: domoAiLogo, url: 'https://domoai.app/', article: placeholderArticle },
-  { name: 'Viggle AI', logo: viggleAiLogo, url: 'https://www.viggle.ai/', article: placeholderArticle },
-  { name: 'Haiper AI', logo: haiperAiLogo, url: 'https://haiper.ai/', article: placeholderArticle },
+  { name: 'iMyFone', logo: '<img src="https://ik.imagekit.io/bensusx9i/unnamed-1_4_11zon.webp?updatedAt=1761053952264" alt="iMyFone Logo" loading="lazy" style="object-fit: contain; width: 100%; height: 100%;" />', url: 'https://www.imyfone.com/', article: placeholderArticle },
+  { name: 'Imagine art', logo: '<img src="https://ik.imagekit.io/bensusx9i/jjjjknbkm(1)(1)_5_11zon.webp?updatedAt=1761053952210" alt="Imagine art Logo" loading="lazy" style="object-fit: contain; width: 100%; height: 100%;" />', url: 'https://www.imagine.art/', article: placeholderArticle },
+  { name: 'Pollo Ai', logo: '<img src="https://ik.imagekit.io/bensusx9i/ljkhhkhkk(1)(1)_7_11zon.webp?updatedAt=1761053952298" alt="Pollo Ai Logo" loading="lazy" style="object-fit: contain; width: 100%; height: 100%;" />', url: 'https://www.pollo.ai/', article: placeholderArticle },
+  { name: 'Artist', logo: '<img src="https://ik.imagekit.io/bensusx9i/Copilot_20251019_125715(1)_11zon.png?updatedAt=1761054499968" alt="Artist Logo" loading="lazy" style="object-fit: contain; width: 100%; height: 100%;" />', url: 'https://artist.ai/', article: placeholderArticle },
+  { name: 'Vidnoz', logo: '<img src="https://ik.imagekit.io/bensusx9i/4KWfOYnR_400x400(1)(1)_11zon(1).jpg?updatedAt=1761054499925" alt="Vidnoz Logo" loading="lazy" style="object-fit: contain; width: 100%; height: 100%;" />', url: 'https://www.vidnoz.com/', article: placeholderArticle },
+  { name: 'Higgsfield', logo: '<img src="https://ik.imagekit.io/bensusx9i/higgsfield_logo(1)(1)_9_11zon.webp?updatedAt=1761053952202" alt="Higgsfield Logo" loading="lazy" style="object-fit: contain; width: 100%; height: 100%;" />', url: 'https://www.higgsfield.com/', article: placeholderArticle },
+  { name: 'VidFly', logo: '<img src="https://ik.imagekit.io/bensusx9i/vidfly-icon-filled-256(1)(1)(1)_15_11zon.webp?updatedAt=1761053952192" alt="VidFly Logo" loading="lazy" style="object-fit: contain; width: 100%; height: 100%;" />', url: 'https://vidfly.ai/', article: placeholderArticle },
+  { name: 'Leonardo', logo: '<img src="https://ik.imagekit.io/bensusx9i/leonardo-logo_1_-removebg-preview(1)_11_11zon.webp?updatedAt=1761053952362" alt="Leonardo Logo" loading="lazy" style="object-fit: contain; width: 100%; height: 100%;" />', url: 'https://leonardo.ai/', article: placeholderArticle },
+  { name: 'DeeVid AI', logo: '<img src="https://ik.imagekit.io/bensusx9i/22247730-deevid-logo-422x422-removebg-preview(1)_14_11zon.webp?updatedAt=1761053952385" alt="DeeVid AI Logo" loading="lazy" style="object-fit: contain; width: 100%; height: 100%;" />', url: 'https://deevid.ai/', article: placeholderArticle },
+  { name: 'PIXLR', logo: '<img src="https://ik.imagekit.io/bensusx9i/X4uS5WUa_400x400(1)(1)_13_11zon.webp?updatedAt=1761053952264" alt="PIXLR Logo" loading="lazy" style="object-fit: contain; width: 100%; height: 100%;" />', url: 'https://pixlr.com/', article: placeholderArticle },
+  { name: 'Zebracat', logo: '<img src="https://ik.imagekit.io/bensusx9i/zebracat-icon-filled-256(1)(1)_6_11zon.webp?updatedAt=1761053952240" alt="Zebracat Logo" loading="lazy" style="object-fit: contain; width: 100%; height: 100%;" />', url: 'https://www.zebracat.ai/', article: placeholderArticle },
+  { name: 'Fliki Ai', logo: '<img src="https://ik.imagekit.io/bensusx9i/fliki-icon-filled-256-1(1)_10_11zon.webp?updatedAt=1761053952137" alt="Fliki Ai Logo" loading="lazy" style="object-fit: contain; width: 100%; height: 100%;" />', url: 'https://fliki.ai/', article: placeholderArticle },
 ];
 
 export const INITIAL_IMAGE_TOOLS: Tool[] = [
-  { name: 'Pixelcut', logo: '<img src="https://ik.imagekit.io/wee6hkfuj/unnamed(1)(2).png?updatedAt=1760874836593" alt="Pixelcut Logo" style="object-fit: contain; width: 100%; height: 100%;" />', url: 'https://www.pixelcut.ai/', article: placeholderArticle },
-  { name: 'Leonardo', logo: '<img src="https://ik.imagekit.io/wee6hkfuj/leonardo-logo_1_-removebg-preview.png?updatedAt=1760873809348" alt="Leonardo Logo" style="object-fit: contain; width: 100%; height: 100%;" />', url: 'https://leonardo.ai/', article: placeholderArticle },
+  { name: 'Leonardo', logo: '<img src="https://ik.imagekit.io/bensusx9i/leonardo-logo_1_-removebg-preview(1)_11_11zon.webp?updatedAt=1761053952362" alt="Leonardo Logo" loading="lazy" style="object-fit: contain; width: 100%; height: 100%;" />', url: 'https://leonardo.ai/', article: placeholderArticle },
 ];
 
 export const LONG_VIDEO_TOOLS: Tool[] = [
-  { name: 'Zebracat', logo: '<img src="https://ik.imagekit.io/wee6hkfuj/zebracat-icon-filled-256(1)(1).png?updatedAt=1760864349815" alt="Zebracat Logo" style="object-fit: contain; width: 100%; height: 100%;" />', url: 'https://www.zebracat.ai/', article: placeholderArticle },
-  { name: 'Colossyan', logo: '<img src="https://ik.imagekit.io/wee6hkfuj/images(1)(1).png?updatedAt=1760897135367" alt="Colossyan Logo" style="object-fit: contain; width: 100%; height: 100%;" />', url: 'https://www.colossyan.com/', article: placeholderArticle },
-  { name: 'Fliki Ai', logo: '<img src="https://ik.imagekit.io/wee6hkfuj/fliki-icon-filled-256-1(1)(1).jpg?updatedAt=1760890839752" alt="Fliki Ai Logo" style="object-fit: contain; width: 100%; height: 100%;" />', url: 'https://fliki.ai/', article: placeholderArticle },
-  { name: 'VEED', logo: '<img src="https://ik.imagekit.io/wee6hkfuj/idZ6QLGyv0-removebg-preview.png?updatedAt=1760896516185" alt="VEED Logo" style="object-fit: contain; width: 100%; height: 100%;" />', url: 'https://www.veed.io/', article: placeholderArticle },
-  { name: 'Pictory', logo: '<img src="https://ik.imagekit.io/wee6hkfuj/pictory_500-removebg-preview(1).png?updatedAt=1760897456366" alt="Pictory Logo" style="object-fit: contain; width: 100%; height: 100%;" />', url: 'https://pictory.ai/', article: placeholderArticle },
-  { name: 'Synthesia', logo: '<img src="https://ik.imagekit.io/wee6hkfuj/imagesfhvn.png?updatedAt=1760897684256" alt="Synthesia Logo" style="object-fit: contain; width: 100%; height: 100%;" />', url: 'https://www.synthesia.io/', article: placeholderArticle },
-  { name: 'HeyGen', logo: '<img src="https://ik.imagekit.io/wee6hkfuj/apps.10279.13b71432-e992-43be-af65-123449130199.19fc4577-aa0a-4a42-b54d-4d75859dc0c8.png?updatedAt=1760898255285" alt="HeyGen Logo" style="object-fit: contain; width: 100%; height: 100%;" />', url: 'https://www.heygen.com/', article: placeholderArticle },
-  { name: 'AKOOL', logo: '<img src="https://ik.imagekit.io/wee6hkfuj/akool.jpg?updatedAt=1760898961241" alt="AKOOL Logo" style="object-fit: contain; width: 100%; height: 100%;" />', url: 'https://akool.com/', article: placeholderArticle },
-  { name: 'Descript', logo: '<img src="https://ik.imagekit.io/wee6hkfuj/descript-icon-vrjwgsy86fm07riycz7zt63-removebg-preview(1).png?updatedAt=1760899550081" alt="Descript Logo" style="object-fit: contain; width: 100%; height: 100%;" />', url: 'https://www.descript.com/', article: placeholderArticle },
-  { name: 'InVideo', logo: invideoLogo, url: 'https://invideo.io/', article: placeholderArticle },
-  { name: 'Opus Clip', logo: opusClipLogo, url: 'https://www.opus.pro/', article: placeholderArticle },
-  { name: 'Veed.io', logo: veedLogo, url: 'https://www.veed.io/', article: placeholderArticle },
-  { name: 'Runway', logo: runwayLogo, url: 'https://runwayml.com/', article: placeholderArticle },
-  { name: 'Lumen5', logo: lumen5Logo, url: 'https://lumen5.com/', article: placeholderArticle },
-  { name: 'Kapwing', logo: kapwingLogo, url: 'https://www.kapwing.com/', article: placeholderArticle },
-  { name: 'Raw Shorts', logo: rawShortsLogo, url: 'https://www.rawshorts.com/', article: placeholderArticle },
-  { name: 'Wave.video', logo: waveVideoLogo, url: 'https://wave.video/', article: placeholderArticle },
-  { name: 'Wisecut', logo: wisecutLogo, url: 'https://www.wisecut.video/', article: placeholderArticle },
-  { name: 'Munch', logo: munchLogo, url: 'https://www.getmunch.com/', article: placeholderArticle },
-  { name: 'Klap', logo: klapLogo, url: 'https://klap.app/', article: placeholderArticle },
-  { name: 'Vidyo.ai', logo: vidyoAiLogo, url: 'https://vidyo.ai/', article: placeholderArticle },
-  { name: 'Quickvid', logo: quickvidLogo, url: 'https://quickvid.ai/', article: placeholderArticle },
-  { name: 'Clipchamp', logo: clipchampLogo, url: 'https://clipchamp.com/', article: placeholderArticle },
-  { name: 'HeyGen', logo: heygenLogo, url: 'https://www.heygen.com/', article: placeholderArticle },
-  { name: 'Type Studio', logo: typeStudioLogo, url: 'https://www.typestudio.co/', article: placeholderArticle },
-  { name: 'Kamua', logo: kamuaLogo, url: 'https://kamua.com/', article: placeholderArticle },
+  { name: 'Zebracat', logo: '<img src="https://ik.imagekit.io/bensusx9i/zebracat-icon-filled-256(1)(1)_6_11zon.webp?updatedAt=1761053952240" alt="Zebracat Logo" loading="lazy" style="object-fit: contain; width: 100%; height: 100%;" />', url: 'https://www.zebracat.ai/', article: placeholderArticle },
+  { name: 'Colossyan', logo: '<img src="https://ik.imagekit.io/bensusx9i/images(1)_8_11zon.webp?updatedAt=1761053952119" alt="Colossyan Logo" loading="lazy" style="object-fit: contain; width: 100%; height: 100%;" />', url: 'https://www.colossyan.com/', article: placeholderArticle },
+  { name: 'Fliki Ai', logo: '<img src="https://ik.imagekit.io/bensusx9i/fliki-icon-filled-256-1(1)_10_11zon.webp?updatedAt=1761053952137" alt="Fliki Ai Logo" loading="lazy" style="object-fit: contain; width: 100%; height: 100%;" />', url: 'https://fliki.ai/', article: placeholderArticle },
+  { name: 'VEED', logo: '<img src="https://ik.imagekit.io/bensusx9i/idZ6QLGyv0-removebg-preview_16_11zon.webp?updatedAt=1761053952209" alt="VEED Logo" loading="lazy" style="object-fit: contain; width: 100%; height: 100%;" />', url: 'https://www.veed.io/', article: placeholderArticle },
+  { name: 'Pictory', logo: '<img src="https://ik.imagekit.io/bensusx9i/pictory_500-removebg-preview(1)_18_11zon.webp?updatedAt=1761053952230" alt="Pictory Logo" loading="lazy" style="object-fit: contain; width: 100%; height: 100%;" />', url: 'https://pictory.ai/', article: placeholderArticle },
+  { name: 'Synthesia', logo: '<img src="https://ik.imagekit.io/bensusx9i/imagesfhvn_19_11zon.webp?updatedAt=1761053952215" alt="Synthesia Logo" loading="lazy" style="object-fit: contain; width: 100%; height: 100%;" />', url: 'https://www.synthesia.io/', article: placeholderArticle },
+  { name: 'HeyGen', logo: '<img src="https://ik.imagekit.io/bensusx9i/apps.10279.13b71432-e992-43be-af65-123449130199.19fc4577-aa0a-4a42-b54d-4d75859dc0c8_20_11zon.webp?updatedAt=1761053952139" alt="HeyGen Logo" loading="lazy" style="object-fit: contain; width: 100%; height: 100%;" />', url: 'https://www.heygen.com/', article: placeholderArticle },
+  { name: 'AKOOL', logo: '<img src="https://ik.imagekit.io/bensusx9i/akool_21_11zon.webp?updatedAt=1761053952130" alt="AKOOL Logo" loading="lazy" style="object-fit: contain; width: 100%; height: 100%;" />', url: 'https://akool.com/', article: placeholderArticle },
+  { name: 'Descript', logo: '<img src="https://ik.imagekit.io/bensusx9i/descript-icon-vrjwgsy86fm07riycz7zt63-removebg-preview(1)_22_11zon.webp?updatedAt=1761053952291" alt="Descript Logo" loading="lazy" style="object-fit: contain; width: 100%; height: 100%;" />', url: 'https://www.descript.com/', article: placeholderArticle },
+  { name: 'InVideo', logo: '<img src="https://ik.imagekit.io/bensusx9i/unnamedhfhb_24_11zon.webp?updatedAt=1761053952257" alt="InVideo Logo" loading="lazy" style="object-fit: contain; width: 100%; height: 100%;" />', url: 'https://invideo.io/', article: placeholderArticle },
+  { name: 'Ai Studios', logo: '<img src="https://ik.imagekit.io/bensusx9i/unnamedkhjknm_25_11zon.webp?updatedAt=1761053952175" alt="Ai Studios Logo" loading="lazy" style="object-fit: contain; width: 100%; height: 100%;" />', url: 'https://aistudios.com/', article: placeholderArticle },
+  { name: 'Elai', logo: '<img src="https://ik.imagekit.io/bensusx9i/imagesjhgjkbn_30_11zon.webp?updatedAt=1761053952271" alt="Elai Logo" loading="lazy" style="object-fit: contain; width: 100%; height: 100%;" />', url: 'https://elai.io/', article: placeholderArticle },
+  { name: 'Kapwing', logo: '<img src="https://ik.imagekit.io/bensusx9i/kapwing_23_11zon.webp?updatedAt=1761053952244" alt="Kapwing Logo" loading="lazy" style="object-fit: contain; width: 100%; height: 100%;" />', url: 'https://www.kapwing.com/', article: placeholderArticle },
+  { name: 'Renderforest', logo: '<img src="https://ik.imagekit.io/bensusx9i/RenderForest_2017-icon-removebg-preview_29_11zon.webp?updatedAt=1761053952281" alt="Renderforest Logo" loading="lazy" style="object-fit: contain; width: 100%; height: 100%;" />', url: 'https://www.renderforest.com/', article: placeholderArticle },
+];
+
+export const VIRAL_SHORT_TOOLS: Tool[] = [
+  { name: 'Short Ai', logo: '<img src="https://ik.imagekit.io/bensusx9i/219620309-removebg-preview(1)_26_11zon.webp?updatedAt=1761053952308" alt="Short Ai Logo" loading="lazy" style="object-fit: contain; width: 100%; height: 100%;" />', url: 'https://www.short-ai.com/', article: placeholderArticle },
+  { name: 'Klap', logo: '<img src="https://ik.imagekit.io/bensusx9i/7XMz-YQq_400x400-removebg-preview_27_11zon.webp?updatedAt=1761053952206" alt="Klap Logo" loading="lazy" style="object-fit: contain; width: 100%; height: 100%;" />', url: 'https://klap.app/', article: placeholderArticle },
+  { name: 'Quso Ai', logo: '<img src="https://ik.imagekit.io/bensusx9i/quso_ai_logo_28_11zon.webp?updatedAt=1761053952322" alt="Quso Ai Logo" loading="lazy" style="object-fit: contain; width: 100%; height: 100%;" />', url: 'https://quso.ai/', article: placeholderArticle },
 ];
 
 export const WRITING_TOOLS: Tool[] = [
-    { name: 'Jasper', logo: genericWritingLogo, url: 'https://www.jasper.ai/', article: placeholderArticle },
-    { name: 'Copy.ai', logo: genericWritingLogo, url: 'https://www.copy.ai/', article: placeholderArticle },
-    { name: 'Writesonic', logo: genericWritingLogo, url: 'https://writesonic.com/', article: placeholderArticle },
-    { name: 'Rytr', logo: genericWritingLogo, url: 'https://rytr.me/', article: placeholderArticle },
-    { name: 'Frase.io', logo: genericWritingLogo, url: 'https://www.frase.io/', article: placeholderArticle },
-    { name: 'Grammarly', logo: genericWritingLogo, url: 'https://www.grammarly.com/', article: placeholderArticle },
-    { name: 'ShortlyAI', logo: genericWritingLogo, url: 'https://www.shortlyai.com/', article: placeholderArticle },
-    { name: 'CopySmith', logo: genericWritingLogo, url: 'https://copiesmith.ai/', article: placeholderArticle },
+    { name: 'Rytr', logo: '<img src="https://ik.imagekit.io/bensusx9i/jgjgjkkj_38_11zon.webp?updatedAt=1761053952097" alt="Rytr Logo" loading="lazy" style="object-fit: contain; width: 100%; height: 100%;" />', url: 'https://rytr.me/', article: placeholderArticle },
+    { name: 'Frase', logo: '<img src="https://ik.imagekit.io/bensusx9i/hkdffkhvb_37_11zon.webp?updatedAt=1761053952217" alt="Frase Logo" loading="lazy" style="object-fit: contain; width: 100%; height: 100%;" />', url: 'https://www.frase.io/', article: placeholderArticle },
+    { name: 'Grammarly', logo: '<img src="https://ik.imagekit.io/bensusx9i/jdjfvbjbj-removebg-preview_35_11zon.webp?updatedAt=1761053952114" alt="Grammarly Logo" loading="lazy" style="object-fit: contain; width: 100%; height: 100%;" />', url: 'https://www.grammarly.com/', article: placeholderArticle },
+    { name: 'Writesonic', logo: '<img src="https://ik.imagekit.io/bensusx9i/jkfhjvnv_34_11zon.webp?updatedAt=1761053952198" alt="Writesonic Logo" loading="lazy" style="object-fit: contain; width: 100%; height: 100%;" />', url: 'https://writesonic.com/', article: placeholderArticle },
 ];
 
 export const AUDIO_TOOLS: Tool[] = [
-    { name: 'ElevenLabs', logo: genericAudioLogo, url: 'https://elevenlabs.io/', article: placeholderArticle },
-    { name: 'Murf.ai', logo: genericAudioLogo, url: 'https://murf.ai/', article: placeholderArticle },
-    { name: 'Descript', logo: descriptLogo, url: 'https://www.descript.com/', article: placeholderArticle },
-    { name: 'LALAL.AI', logo: genericAudioLogo, url: 'https://www.lalal.ai/', article: placeholderArticle },
-    { name: 'Resemble AI', logo: genericAudioLogo, url: 'https://www.resemble.ai/', article: placeholderArticle },
-    { name: 'Suno AI', logo: genericAudioLogo, url: 'https://www.suno.ai/', article: placeholderArticle },
-    { name: 'AIVA', logo: genericAudioLogo, url: 'https://www.aiva.ai/', article: placeholderArticle },
-    { name: 'Play.ht', logo: genericAudioLogo, url: 'https://play.ht/', article: placeholderArticle },
+    { name: 'Murf.ai', logo: '<img src="https://ik.imagekit.io/bensusx9i/83059529_32_11zon.webp?updatedAt=1761053952192" alt="Murf.ai Logo" loading="lazy" style="object-fit: contain; width: 100%; height: 100%;" />', url: 'https://murf.ai/', article: placeholderArticle },
+    { name: 'ElevenLabs', logo: '<img src="https://ik.imagekit.io/bensusx9i/hfhhbn_31_11zon.webp?updatedAt=1761053952154" alt="ElevenLabs Logo" loading="lazy" style="object-fit: contain; width: 100%; height: 100%;" />', url: 'https://elevenlabs.io/', article: placeholderArticle },
+    { name: 'Speechify', logo: '<img src="https://ik.imagekit.io/bensusx9i/8f38b537a39fd6abb27fdc313e3f02f6_33_11zon.webp?updatedAt=1761053952312" alt="Speechify Logo" loading="lazy" style="object-fit: contain; width: 100%; height: 100%;" />', url: 'https://speechify.com/', article: placeholderArticle },
 ];
 
 export const CHATBOT_TOOLS: Tool[] = [
