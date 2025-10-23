@@ -36,11 +36,10 @@ interface ToolSectionProps {
   description: string;
   tools: Tool[];
   toolType: string;
-  onNavigate: (pageState: { page: string; toolType?: string; tool?: Tool; }) => void;
   underlineColor: string;
 }
 
-const ToolSection: React.FC<ToolSectionProps> = ({ id, title, description, tools, toolType, onNavigate, underlineColor }) => {
+const ToolSection: React.FC<ToolSectionProps> = ({ id, title, description, tools, toolType, underlineColor }) => {
   const [ref, isVisible] = useOnScreen({ threshold: 0.1 });
 
   return (
@@ -72,7 +71,7 @@ const ToolSection: React.FC<ToolSectionProps> = ({ id, title, description, tools
              className={`transition-all duration-700 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-5'}`}
              style={{ transitionDelay: `${index * 100}ms` }}
           >
-            <ToolCard tool={tool} onNavigate={onNavigate} />
+            <ToolCard tool={tool} />
           </div>
         ))}
       </div>

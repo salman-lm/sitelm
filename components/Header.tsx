@@ -12,7 +12,7 @@ const uniqueTools = allTools.reduce((acc, current) => {
 }, [] as Tool[]);
 
 interface HeaderProps {
-  onNavigate: (pageState: { page: string; toolType?: string; tool?: Tool }) => void;
+  onNavigate: (pageState: { page: string; toolType?: string; }) => void;
   searchQuery: string;
   setSearchQuery: (query: string) => void;
 }

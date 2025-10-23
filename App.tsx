@@ -32,28 +32,10 @@ import ToolCard from './components/ToolCard';
 import ScrollToTopButton from './components/ScrollToTopButton';
 import ExplorePage from './components/ExplorePage';
 import type { Tool } from './constants';
-import ToolDetailsPage from './components/ToolDetailsPage';
 import MaintenancePopup from './components/MaintenancePopup';
 
-// Consolidate all tools into a single, unique list
-const allToolsLists = [
-    ...INITIAL_VIDEO_TOOLS, ...INITIAL_IMAGE_TOOLS, ...LONG_VIDEO_TOOLS, ...VIRAL_SHORT_TOOLS,
-    ...WRITING_TOOLS, ...AUDIO_TOOLS, ...CHATBOT_TOOLS, ...CODING_TOOLS,
-    ...RESEARCH_TOOLS, ...BUSINESS_TOOLS, ...PRODUCTIVITY_TOOLS, ...DATA_TOOLS,
-    ...EDUCATION_TOOLS, ...HEALTHCARE_TOOLS, ...LEGAL_FINANCE_TOOLS, ...ECOMMERCE_TOOLS,
-    ...HR_RECRUITING_TOOLS, ...GAMING_TOOLS, ...STORYTELLING_TOOLS, ...AUTOMATION_TOOLS,
-    ...SEARCH_DISCOVERY_TOOLS, ...SECURITY_PRIVACY_TOOLS, ...EXPERIMENT_SANDBOX_TOOLS
-];
-
-const allUniqueTools = allToolsLists.reduce((acc, current) => {
-    if (!acc.find(item => item.name === current.name)) {
-      acc.push(current);
-    }
-    return acc;
-}, [] as Tool[]);
-
 // Function to derive app state from URL path
-const getPageStateFromPath = (path: string): { page: string; toolType?: string; tool?: Tool } => {
+const getPageStateFromPath = (path: string): { page: string; toolType?: string; } => {
     const pathParts = path.split('/').filter(p => p);
     
     if (pathParts.length === 0) return { page: 'home' };
@@ -68,25 +50,18 @@ const getPageStateFromPath = (path: string): { page: string; toolType?: string; 
         case 'explore': return { page: 'explore' };
         case 'all-tools':
             return param ? { page: 'all-tools', toolType: param } : { page: 'home' };
-        case 'tool-details':
-            if (param) {
-                const tool = allUniqueTools.find(t => t.name === param);
-                if (tool) return { page: 'tool-details', tool };
-            }
-            return { page: 'home' }; // Fallback if tool not found
     }
     return { page: 'home' }; // Default fallback
 };
 
 // Function to derive URL path from app state
-const getPathFromPageState = (pageState: { page: string; toolType?: string; tool?: Tool }): string => {
+const getPathFromPageState = (pageState: { page: string; toolType?: string; }): string => {
     switch (pageState.page) {
         case 'terms': return '/terms';
         case 'privacy': return '/privacy';
         case 'contact': return '/contact';
         case 'explore': return '/explore';
         case 'all-tools': return `/all-tools/${encodeURIComponent(pageState.toolType!)}`;
-        case 'tool-details': return `/tool-details/${encodeURIComponent(pageState.tool!.name)}`;
         case 'home':
         default:
             return '/';
@@ -97,7 +72,7 @@ const getPathFromPageState = (pageState: { page: string; toolType?: string; tool
 
 const AllToolsPage: React.FC<{
   toolType: string;
-  onNavigate: (pageState: { page: string; tool?: Tool; toolType?: string; }) => void;
+  onNavigate: (pageState: { page: string; toolType?: string; }) => void;
 }> = ({ toolType, onNavigate }) => {
   const toolsSource = toolType === 'Video' 
     ? INITIAL_VIDEO_TOOLS 
@@ -129,7 +104,7 @@ const AllToolsPage: React.FC<{
               className="animate-fade-in"
               style={{ animationDelay: `${index * 50}ms`, opacity: 0 }}
             >
-              <ToolCard tool={tool} onNavigate={onNavigate} />
+              <ToolCard tool={tool} />
             </div>
           ))}
         </div>
@@ -177,7 +152,7 @@ const Footer: React.FC<{ onNavigate: (pageState: { page: string }) => void }> = 
 };
 
 const HomePage: React.FC<{ 
-  onNavigate: (pageState: { page: string; toolType?: string; tool?: Tool }) => void;
+  onNavigate: (pageState: { page: string; toolType?: string; }) => void;
 }> = ({ onNavigate }) => {
   return (
     <>
@@ -189,7 +164,6 @@ const HomePage: React.FC<{
           description="Create cinematic masterpieces, engaging social media clips, and detailed product demos from simple text prompts or existing footage. These tools are redefining video production."
           tools={INITIAL_VIDEO_TOOLS}
           toolType="Video"
-          onNavigate={onNavigate}
           underlineColor="#3b82f6"
         />
         <div className="my-16 sm:my-24"></div>
@@ -199,7 +173,6 @@ const HomePage: React.FC<{
           description="Go viral with minimal effort. These tools help you repurpose long-form content into engaging, shareable short videos perfect for social media."
           tools={LONG_VIDEO_TOOLS}
           toolType="Long Video"
-          onNavigate={onNavigate}
           underlineColor="#22d3ee"
         />
         <div className="my-16 sm:my-24"></div>
@@ -209,7 +182,6 @@ const HomePage: React.FC<{
           description="Automatically find the most engaging parts of your long-form content and transform them into captivating, shareable shorts ready for social media."
           tools={VIRAL_SHORT_TOOLS}
           toolType="Viral Shorts"
-          onNavigate={onNavigate}
           underlineColor="#f472b6"
         />
         <div className="my-16 sm:my-24"></div>
@@ -219,7 +191,6 @@ const HomePage: React.FC<{
           description="Transform any text into natural-sounding speech with AI-powered voice generators. Perfect for podcasts, audiobooks, and accessibility."
           tools={AUDIO_TOOLS}
           toolType="Audio"
-          onNavigate={onNavigate}
           underlineColor="#10b981"
         />
         <div className="my-16 sm:my-24"></div>
@@ -308,7 +279,7 @@ const ContactPage: React.FC<{ onNavigate: (pageState: { page: string }) => void 
 // END: Component Definitions
 
 const App: React.FC = () => {
-  const [currentPage, setCurrentPage] = useState<{ page: string; toolType?: string; tool?: Tool }>(() => getPageStateFromPath(window.location.pathname));
+  const [currentPage, setCurrentPage] = useState<{ page: string; toolType?: string; }>(() => getPageStateFromPath(window.location.pathname));
   const [searchQuery, setSearchQuery] = useState('');
   const [isMaintenanceMode] = useState(false);
 
@@ -326,9 +297,9 @@ const App: React.FC = () => {
 
   useLayoutEffect(() => {
     window.scrollTo({ top: 0, left: 0, behavior: 'instant' });
-  }, [currentPage.page, currentPage.tool?.name]);
+  }, [currentPage.page, currentPage.toolType]);
 
-  const handleNavigate = (pageState: { page: string; toolType?: string; tool?: Tool }) => {
+  const handleNavigate = (pageState: { page: string; toolType?: string; }) => {
     const path = getPathFromPageState(pageState);
     if (window.location.pathname !== path) {
       window.history.pushState(pageState, '', path);
@@ -337,7 +308,7 @@ const App: React.FC = () => {
   };
 
   const renderPage = () => {
-    const { page, toolType, tool } = currentPage;
+    const { page, toolType } = currentPage;
     switch (page) {
       case 'terms':
         return <TermsPage onNavigate={handleNavigate} />;
@@ -349,8 +320,6 @@ const App: React.FC = () => {
         return <AllToolsPage toolType={toolType!} onNavigate={handleNavigate} />;
       case 'explore':
         return <ExplorePage onNavigate={handleNavigate} />;
-      case 'tool-details':
-        return <ToolDetailsPage tool={tool!} onNavigate={handleNavigate} />;
       case 'home':
       default:
         return <HomePage onNavigate={handleNavigate} />;

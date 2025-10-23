@@ -99,7 +99,7 @@ const comingSoonToolsSet = new Set([
 
 
 interface ExplorePageProps {
-  onNavigate: (pageState: { page: string; tool?: Tool }) => void;
+  onNavigate: (pageState: { page: string; }) => void;
 }
 
 const ExplorePage: React.FC<ExplorePageProps> = ({ onNavigate }) => {
@@ -182,7 +182,6 @@ const ExplorePage: React.FC<ExplorePageProps> = ({ onNavigate }) => {
               >
                 <ToolCard 
                   tool={tool} 
-                  onNavigate={onNavigate}
                   isComingSoon={isComingSoon}
                   onComingSoonClick={() => setIsPopupOpen(true)}
                 />

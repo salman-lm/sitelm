@@ -3,15 +3,14 @@ import type { Tool } from '../constants';
 
 interface ToolCardProps {
   tool: Tool;
-  onNavigate: (pageState: { page: string; tool: Tool }) => void;
   isComingSoon?: boolean;
   onComingSoonClick?: () => void;
 }
 
-const ToolCard: React.FC<ToolCardProps> = ({ tool, onNavigate, isComingSoon = false, onComingSoonClick }) => {
-  const cardRef = useRef<HTMLDivElement>(null);
+const ToolCard: React.FC<ToolCardProps> = ({ tool, isComingSoon = false, onComingSoonClick }) => {
+  const cardRef = useRef<HTMLAnchorElement>(null);
 
-  const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
+  const handleMouseMove = (e: React.MouseEvent<HTMLAnchorElement>) => {
     if (!cardRef.current) return;
     const { left, top, width, height } = cardRef.current.getBoundingClientRect();
     const x = e.clientX - left - width / 2;
@@ -27,24 +26,21 @@ const ToolCard: React.FC<ToolCardProps> = ({ tool, onNavigate, isComingSoon = fa
     cardRef.current.style.transform = 'perspective(1000px) rotateX(0) rotateY(0) scale3d(1, 1, 1)';
   };
   
-  const handleCardClick = () => {
-    if (isComingSoon && onComingSoonClick) {
-      onComingSoonClick();
-    } else if (!isComingSoon) {
-      onNavigate({ page: 'tool-details', tool });
+  const handleCardClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
+    if (isComingSoon) {
+      e.preventDefault();
+      if (onComingSoonClick) {
+        onComingSoonClick();
+      }
     }
   };
 
-  const handleLinkClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
-    e.stopPropagation();
-    if (isComingSoon) {
-      e.preventDefault();
-    }
-  }
-
   return (
-    <div
+    <a
       ref={cardRef}
+      href={tool.url}
+      target="_blank"
+      rel="noopener noreferrer"
       onClick={handleCardClick}
       onMouseMove={isComingSoon ? undefined : handleMouseMove}
       onMouseLeave={isComingSoon ? undefined : handleMouseLeave}
@@ -61,18 +57,14 @@ const ToolCard: React.FC<ToolCardProps> = ({ tool, onNavigate, isComingSoon = fa
         <div style={{ transform: 'translateZ(20px)' }}>
           <p className="font-semibold text-sm sm:text-base text-gray-200">{tool.name}</p>
         </div>
-        <a 
-          href={tool.url}
-          target="_blank"
-          rel="noopener noreferrer"
-          onClick={handleLinkClick}
+        <div 
           className={`px-5 py-2 text-sm font-semibold text-white bg-gradient-to-r from-blue-600 to-purple-700 rounded-full shadow-lg transition-transform duration-300 ${isComingSoon ? '' : 'group-hover:scale-110'}`}
           style={{ transform: 'translateZ(30px)' }}
         >
           Try it
-        </a>
+        </div>
       </div>
-    </div>
+    </a>
   );
 };
 
