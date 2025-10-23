@@ -1,58 +1,54 @@
-import React, { useState, useEffect, useCallback } from 'react';
-
-const TEXTS_TO_ANIMATE = [
-  "Discover Tools That Saves You Hours.",
-  "Turn Ideas into High Quality Visuals.",
-  "Create Stunning AI-Powered Videos.",
-  "Generate Art from Your Imagination."
-];
-const TYPING_SPEED = 120;
-const DELETING_SPEED = 50;
-const DELAY_BETWEEN_TEXTS = 2000;
+import React, { useState, useEffect } from 'react';
 
 interface HeroProps {
   onNavigate: (pageState: { page: string }) => void;
 }
 
 const Hero: React.FC<HeroProps> = ({ onNavigate }) => {
-  const [text, setText] = useState('');
-  const [loopNum, setLoopNum] = useState(0);
-  const [isDeleting, setIsDeleting] = useState(false);
-  const [typingSpeed, setTypingSpeed] = useState(TYPING_SPEED);
-
-  const handleTyping = useCallback(() => {
-    const i = loopNum % TEXTS_TO_ANIMATE.length;
-    const fullText = TEXTS_TO_ANIMATE[i];
-
-    if (isDeleting) {
-      setText(prev => prev.substring(0, prev.length - 1));
-      setTypingSpeed(DELETING_SPEED);
-    } else {
-      setText(prev => fullText.substring(0, prev.length + 1));
-      setTypingSpeed(TYPING_SPEED);
-    }
-
-    if (!isDeleting && text === fullText) {
-      setTimeout(() => setIsDeleting(true), DELAY_BETWEEN_TEXTS);
-    } else if (isDeleting && text === '') {
-      setIsDeleting(false);
-      setLoopNum(prev => prev + 1);
-    }
-  }, [isDeleting, loopNum, text]);
-
-
-  useEffect(() => {
-    const timer = setTimeout(() => {
-      handleTyping();
-    }, typingSpeed);
-
-    return () => clearTimeout(timer);
-  }, [text, handleTyping, typingSpeed]);
-  
   const handleExploreClick = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
     onNavigate({ page: 'explore' });
   };
+  
+  const textOptions = [
+    "Turn Text into High-Quality Videos.",
+    "Create Viral Videos in Seconds.",
+    "Generate Realistic Voices from Text.",
+    "Bring Creative Visions to Life."
+  ];
+  const [textIndex, setTextIndex] = useState(0);
+  const [currentText, setCurrentText] = useState('');
+  const [isDeleting, setIsDeleting] = useState(false);
+
+  useEffect(() => {
+    const handleTyping = () => {
+      const fullText = textOptions[textIndex];
+      
+      if (isDeleting) {
+        // Deleting text
+        setCurrentText(currentText.substring(0, currentText.length - 1));
+      } else {
+        // Typing text
+        setCurrentText(fullText.substring(0, currentText.length + 1));
+      }
+
+      // Logic to switch between typing and deleting
+      if (!isDeleting && currentText === fullText) {
+        // Pause at the end of typing
+        setTimeout(() => setIsDeleting(true), 2000);
+      } else if (isDeleting && currentText === '') {
+        // Finished deleting, move to next text
+        setIsDeleting(false);
+        setTextIndex((prevIndex) => (prevIndex + 1) % textOptions.length);
+      }
+    };
+
+    const typingSpeed = isDeleting ? 75 : 150;
+    const timer = setTimeout(handleTyping, typingSpeed);
+
+    return () => clearTimeout(timer);
+  }, [currentText, isDeleting, textIndex]);
+
 
   return (
     <div className="relative h-[60vh] w-full flex items-center justify-center text-center overflow-hidden">
@@ -67,11 +63,12 @@ const Hero: React.FC<HeroProps> = ({ onNavigate }) => {
       <div className="absolute inset-0 bg-black/60 z-1"></div>
       
       <div className="relative z-10 px-4 w-full">
-        <h2 className="text-3xl sm:text-4xl md:text-6xl font-extrabold tracking-tight break-words">
+        <h2 className="text-3xl sm:text-4xl md:text-6xl font-extrabold tracking-tight break-words h-24 sm:h-28 md:h-32 flex items-center justify-center">
           <span className="bg-clip-text text-transparent bg-gradient-to-r from-blue-300 to-purple-400">
-            {text}
+            {/* The non-breaking space ensures the height is maintained even when text is empty */}
+            {currentText || '\u00A0'}
+            <span className="cursor-blink">|</span>
           </span>
-          <span className="animate-pulse text-blue-300">|</span>
         </h2>
         <p className="mt-6 max-w-2xl mx-auto text-lg md:text-xl text-gray-300">
           Discover the best AI tools to bring your creative visions to life.

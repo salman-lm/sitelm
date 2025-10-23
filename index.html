@@ -98,6 +98,14 @@
       .no-scrollbar::-webkit-scrollbar {
           display: none;
       }
+      
+      @keyframes blink {
+        50% { opacity: 0; }
+      }
+
+      .cursor-blink {
+        animation: blink 1s step-end infinite;
+      }
     </style>
   <script type="importmap">
 {
